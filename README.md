@@ -1,15 +1,15 @@
-[![Join the chat at https://gitter.im/openshift/openshift-ansible](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/openshift/openshift-ansible)
-
 #OpenShift Ansible by Turbonomic
 
-##Whats Different from upstream
+##What's Different from upstream
 This repo creates openshift-origin that allows Master to start with 3rd party scheduler, to replace the default openshift scheduler,
 and provide an advanced full-stack controller using kubeturbo.
 
 ##Prerequisites
 1. Make sure you have Turbonomic instance installed and updated to version 47322, and reachable from Openshift cluster. You can use the following
 offline update to upgrade your Turbonomic appliance.
+
 SUSE: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Containers/update64-47322-5.6.3_demo_containers.zip
+
 RHEL: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Containers/update64_redhat-47322-5.6.3_demo_containers.zip
 2. Install Ansible
 - Install base dependencies:
@@ -45,12 +45,20 @@ openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
 openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
 
 ##Deploy Kubeturbo as Mirror Pod
-1. Make sure openshift cluster is running by "oc get nodes"
+1. Make sure openshift cluster is running
+    ```
+    # List all nodes in the cluster
+    oc get nodes
+    ```
 2. Run post-installation.sh to deploy kubeturbo in your openshift cluster just deployed. You will be asked to provide:
-   a. Turbonomic appliance IP with port number
-   b. Turbonomic appliance Username
-   c. Turbonomic appliance Password
-3. Run oc get pods --all-namespaces -w to watch the kubeturbo pod deployment process.
+   a. Turbonomic appliance IP 
+   b. Turbonomic appliance Username 
+   c. Turbonomic appliance Password 
+3. Make sure the kubeturbo pod deployment succeed.
+    ```
+    # Watch the pod creation process
+    oc get pods --all-namespaces -w
+    ```
 4. Once kubeturbo starts running, you should be able to see the openshift cluster automatically regists itself to Turbonomic appliance
 5. In order to enable the full-stack control, make sure you also added the underlying infrastructure targets to Turbonomic
 
