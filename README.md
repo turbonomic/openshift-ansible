@@ -28,6 +28,7 @@ RHEL: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Contain
   - [AWS](http://github.com/openshift/openshift-ansible/blob/master/README_AWS.md)
   - [GCE](http://github.com/openshift/openshift-ansible/blob/master/README_GCE.md)
   - [local VMs](http://github.com/openshift/openshift-ansible/blob/master/README_libvirt.md)
+
 **NOTE: Add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
 openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
 openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
@@ -36,6 +37,7 @@ openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.y
   - [OpenShift Enterprise](https://docs.openshift.com/enterprise/latest/install_config/install/advanced_install.html)
   - [OpenShift Origin](https://docs.openshift.org/latest/install_config/install/advanced_install.html)
   - [Atomic Enterprise](http://github.com/openshift/openshift-ansible/blob/master/README_AEP.md)
+  
 **NOTE: Add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
 openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
 openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
