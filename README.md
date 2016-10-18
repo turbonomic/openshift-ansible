@@ -27,6 +27,7 @@ offline update to upgrade your Turbonomic appliance.
 ##Setup openshift-origin using openshift-ansible
 
 **NOTE: Regardless of underlying infrastructure, please add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
+
 openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
 
 openshift_master_scheduler_args={'scheduler-name' : ['Kubeturbo']}
