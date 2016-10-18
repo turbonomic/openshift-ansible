@@ -8,9 +8,10 @@ and provide an advanced full-stack controller using kubeturbo.
 1. Make sure you have Turbonomic instance installed and updated to version 47322, and reachable from Openshift cluster. You can use the following
 offline update to upgrade your Turbonomic appliance.
 
-SUSE: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Containers/update64-47322-5.6.3_demo_containers.zip
+   SUSE: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Containers/update64-47322-5.6.3_demo_containers.zip
 
-RHEL: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Containers/update64_redhat-47322-5.6.3_demo_containers.zip
+   RHEL: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Containers/update64_redhat-47322-5.6.3_demo_containers.zip
+
 2. Install Ansible
 - Install base dependencies:
   - Fedora:
@@ -24,44 +25,40 @@ RHEL: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Contain
   ```
 
 ##Setup openshift-origin using openshift-ansible
+
+**NOTE: Regardless of underlying infrastructure, please add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
+openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
+
+openshift_master_scheduler_args={'scheduler-name' : ['Kubeturbo']}
+
 - Setup for a specific cloud:
   - [AWS](http://github.com/openshift/openshift-ansible/blob/master/README_AWS.md)
   - [GCE](http://github.com/openshift/openshift-ansible/blob/master/README_GCE.md)
   - [local VMs](http://github.com/openshift/openshift-ansible/blob/master/README_libvirt.md)
-
-**NOTE: Add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
-openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
-
-openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
 
 - Bring your own host deployments:
   - [OpenShift Enterprise](https://docs.openshift.com/enterprise/latest/install_config/install/advanced_install.html)
   - [OpenShift Origin](https://docs.openshift.org/latest/install_config/install/advanced_install.html)
   - [Atomic Enterprise](http://github.com/openshift/openshift-ansible/blob/master/README_AEP.md)
 
-**NOTE: Add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
-openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
 
-openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
-
-##Deploy Kubeturbo as Mirror Pod
+##Deploy Kubeturbo
 1. Make sure openshift cluster is running
+
     ```
-    # List all nodes in the cluster
-    oc get nodes
+    $ oc get nodes
     ```
 2. Run post-installation.sh to deploy kubeturbo in your openshift cluster just deployed. You will be asked to provide:
    a. Turbonomic appliance IP 
    b. Turbonomic appliance Username 
    c. Turbonomic appliance Password 
 3. Make sure the kubeturbo pod deployment succeed.
+
     ```
-    # Watch the pod creation process
-    oc get pods --all-namespaces -w
+    $ oc get pods --all-namespaces -w
     ```
 4. Once kubeturbo starts running, you should be able to see the openshift cluster automatically regists itself to Turbonomic appliance
 5. In order to enable the full-stack control, make sure you also added the underlying infrastructure targets to Turbonomic
-
 
 ##Misc
 - Build
