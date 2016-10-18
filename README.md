@@ -31,15 +31,17 @@ RHEL: http://download.vmturbo.com/appliance/download/updates/5.6.3-Vegas-Contain
 
 **NOTE: Add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
 openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
+
 openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
 
 - Bring your own host deployments:
   - [OpenShift Enterprise](https://docs.openshift.com/enterprise/latest/install_config/install/advanced_install.html)
   - [OpenShift Origin](https://docs.openshift.org/latest/install_config/install/advanced_install.html)
   - [Atomic Enterprise](http://github.com/openshift/openshift-ansible/blob/master/README_AEP.md)
-  
+
 **NOTE: Add the following options into /etc/ansible/hosts, under [OSEv3:vars], before you run the playbook:**
 openshift_node_kubelet_args={'config' : ['/etc/kubernetes/manifest']}
+
 openshift_master_scheduler_args={'scheduler-name' : ['/etc/kubeturbo/kubeturbo.yml']}
 
 ##Deploy Kubeturbo as Mirror Pod
